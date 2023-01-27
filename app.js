@@ -1,5 +1,8 @@
 require("dotenv").config()
 
+/**
+ * All packages requires
+ */
 const path = require('path')
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts')
@@ -7,14 +10,19 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 
 const app = express();
+app.set('layout' , './includes/main')
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const MONGODB_URI = 'mongodb+srv://modii:pratham@mycluster.l92tp0u.mongodb.net/cookingBlog';
+// some constants 
+const MONGODB_URI = process.env.URI;
 const PORT = process.env.PORT || 3000
 
+/** 
+ * routers required
+ */
 const recipeRoutes = require("./server/routes/recipeRouter")
 
 app.use("/" , recipeRoutes)

@@ -25,7 +25,8 @@ const PORT = process.env.PORT || 3000
  */
 const recipeRoutes = require("./server/routes/recipeRouter")
 
-app.use("/" , recipeRoutes)
+app.use(recipeRoutes)
+
 
 mongoose.set('strictQuery', true);
 mongoose

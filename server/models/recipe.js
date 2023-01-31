@@ -15,8 +15,8 @@ const recipeSchema = new Schema({
         type: String,
         required: true
     },
-    ingrediants: {
-        type: String,
+    ingredients: {
+        type: Array,
         required: true
     },
     category: {
@@ -29,5 +29,7 @@ const recipeSchema = new Schema({
         required: true
     }
 })
+
+recipeSchema.index( {"$**" : 'text'})
 
 module.exports = mongoose.model('Recipe', recipeSchema)

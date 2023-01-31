@@ -79,3 +79,27 @@ exports.searchRecipe = (req,res,next) => {
     })
     .catch(err => console.log(err))
 }
+
+/** EXPLORE LATEST */
+exports.exploreLatest = (req, res, next) => {
+    Recipe.find().sort({_id: -1})
+        .then(recipes => {
+            res.render("explore-latest", {
+                title: "Explore Latest!",
+                recipes: recipes
+            })
+        }).catch(err => console.log(err))
+}
+
+/** EXPLORE RANDOM */
+exports.exploreRandom = (req,res,next) => {
+    let count = Recipe.find().countDocuments()
+    let random = Math.floor(Math.random() * count)
+    Recipe.findOne().skip(random).exec()
+    .then(recipe => {
+        res.render('explore-random' , {
+            title: "Explore-Random",
+            recipe: recipe
+        })
+    })
+}

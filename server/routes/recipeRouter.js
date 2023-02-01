@@ -17,4 +17,10 @@ router.post("/search" , recipeController.searchRecipe)
 router.get("/explore-latest" , recipeController.exploreLatest)
 router.get("/explore-random" , recipeController.exploreRandom)
 
+router.get("/submit-recipe" , recipeController.getSubmit)
+router.post("/submit-recipe" , recipeController.postSubmit)
+
+router.get('/recipe/:id/update' , recipeController.getUpdateRecipe)
+router.post('/recipe/:id/update' , recipeController.postUpdateRecipe)
+
 module.exports = router;

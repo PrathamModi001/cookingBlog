@@ -2,11 +2,17 @@ const express = require("express")
 const router = express.Router()
 
 const recipeController = require('../controllers/recipeController')
+const authController = require('../controllers/authController')
 
 /**
  * APP ROUTES
  */
-router.get("/" , recipeController.getIndex)
+router.get("/" , authController.getSignup)
+router.post("/" , authController.postSignup)
+
+router.get("/login" , authController.getLogin)
+router.post("/login" , authController.postLogin)
+
 router.get("/home", recipeController.getHome)
 
 router.get("/categories" , recipeController.exploreCategories)

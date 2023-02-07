@@ -3,9 +3,13 @@ const User = require("../models/user")
 const bcrypt = require('bcrypt')
 const saltRounds = 12;
 
+exports.getIndex = (req,res,next) => {
+    res.render("")
+}
+
 /** GET SIGNUP PAGE */
 exports.getSignup = (req, res, next) => {
-    res.render('index', {
+    res.render('sign-up', {
         title: "Cook With Modi"
     })
 }
@@ -64,6 +68,8 @@ exports.postLogin = (req,res,next) => {
             bcrypt.compare(password , foundUser.password)
             .then(doMatch => {
                 if(doMatch){
+                    req.session.isAuth = true
+                    console.log(req.session.isAuth)
                     res.redirect("/home")
                     console.log("SUCCESSFULLY LOGGED IN")
                 } else {

@@ -1,0 +1,25 @@
+body {
+	height: 100vh;
+	background: #19092d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+button{
+	margin: 20px;
+	padding: 40px 80px;
+	border: none;
+	cursor: pointer;
+}
+
+/* PIERWSZY SPOSOB WYKORZYSTANIE CIENIA */
+.first{
+	background: #19c3d6;
+	box-shadow: inset 0px 0px 0px 0px #ff0099;
+	transition: all 0.5s ease-in-out;
+}
+.first:hover{
+	box-shadow: inset 0px -200px 0px 0px #ff0099;
+}

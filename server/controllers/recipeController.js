@@ -1,6 +1,14 @@
 const Category = require("../models/category")
 const Recipe = require("../models/recipe")
 
+/** POST HOME: LOGOUT */
+exports.logout = (req,res,next) => {
+    req.session.destroy((err) => {
+        if(err) console.log(err)
+        res.redirect("/")
+    })
+}
+
 /** GET HOME PAGE with categories page, thai,american, chinese sections as well */
 exports.getHome = async (req, res, next) => {
     try {
@@ -17,7 +25,6 @@ exports.getHome = async (req, res, next) => {
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" });
     }
-
 }
 
 /** GET VIEW ALL BUTTON PAGE in categories section */

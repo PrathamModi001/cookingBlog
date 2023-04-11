@@ -92,16 +92,15 @@ exports.exploreLatest = (req, res, next) => {
 }
 
 /** EXPLORE RANDOM */
-exports.exploreRandom = (req, res, next) => {
-    let count = Recipe.find().countDocuments()
-    let random = Math.floor(Math.random() * count)
-    Recipe.findOne().skip(random).exec()
-        .then(recipe => {
-            res.render('explore-random', {
-                title: "Explore-Random",
-                recipe: recipe
-            })
-        })
+exports.exploreRandom = async (req, res) => {
+    try {
+        let count = await Recipe.find().countDocuments();
+        let random = Math.floor(Math.random() * count);
+        let recipe = await Recipe.findOne().skip(random).exec();
+        res.render('explore-random', { title: 'Cooking Blog - Explore Latest', recipe });
+    } catch (error) {
+        res.satus(500).send({ message: error.message || "Error Occured" });
+    }
 }
 
 /** GET SUBMIT RECIPE */
@@ -153,7 +152,7 @@ exports.postSubmit = async (req, res) => {
     } catch (error) {
         // res.json(error);
         req.flash('infoErrors', error);
-        res.redirect('/submit-recipe');
+        res.redirect('/');
     }
 }
 

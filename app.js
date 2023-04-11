@@ -13,6 +13,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 
+const recipeController = require('./server/controllers/recipeController')
 
 const app = express();
 app.set('layout', './includes/main')
@@ -47,6 +48,8 @@ const recipeRoutes = require("./server/routes/recipeRouter")
 
 app.use(recipeRoutes)
 
+// if a route doesnt fall in any of the above routes: then show 404 page: 
+app.use(recipeController.get404);
 
 mongoose.set('strictQuery', true);
 mongoose

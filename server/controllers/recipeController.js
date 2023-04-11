@@ -203,3 +203,9 @@ exports.postUpdateRecipe = (req, res, next) => {
     })
     .catch(err => console.log(err))
 }
+
+exports.get404 = (req,res,next) => {
+    res.render('get404', {
+        title: '404 Not Found',
+    })
+}

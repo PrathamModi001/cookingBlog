@@ -1,11 +1,11 @@
 const Category = require("../models/category")
 const Recipe = require("../models/recipe")
 
-/** POST HOME: LOGOUT */
-exports.logout = (req,res,next) => {
-    req.session.destroy((err) => {
-        if(err) console.log(err)
-        res.redirect("/")
+
+/** GET LANDING PAGE */
+exports.getIndex = (req, res, next) => {
+    res.render('index', {
+        title: "Cook With Modi"
     })
 }
 
@@ -25,6 +25,7 @@ exports.getHome = async (req, res, next) => {
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" });
     }
+
 }
 
 /** GET VIEW ALL BUTTON PAGE in categories section */
@@ -159,7 +160,7 @@ exports.getUpdateRecipe = (req, res, next) => {
 
 exports.postUpdateRecipe = (req, res, next) => {
     const recipeId = req.params.id
-    const updatedName = req.body.name
+    const updatedName= req.body.name
     const updatedDescription = req.body.description
     const updatedEmail = req.body.email
     const updatedIngredients = req.body.ingredients
@@ -187,18 +188,18 @@ exports.postUpdateRecipe = (req, res, next) => {
     });
 
     Recipe.findById(recipeId)
-        .then(recipe => {
-            recipe.name = updatedName;
-            recipe.description = updatedDescription;
-            recipe.email = updatedEmail;
-            recipe.ingredients = updatedIngredients;
-            recipe.category = updatedCategory
-            recipe.image = newImageName
+    .then(recipe => {
+        recipe.name = updatedName;
+        recipe.description = updatedDescription;
+        recipe.email = updatedEmail;
+        recipe.ingredients = updatedIngredients;
+        recipe.category = updatedCategory
+        recipe.image = newImageName
 
-            recipe.save()
-        })
-        .then(result => {
-            res.redirect(`/recipe/${recipeId}`)
-        })
-        .catch(err => console.log(err))
+        recipe.save()
+    })
+    .then(result => {
+        res.redirect(`/recipe/${recipeId}`)
+    })
+    .catch(err => console.log(err))
 }
